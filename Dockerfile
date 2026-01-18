@@ -37,8 +37,7 @@ BR2_TOOLCHAIN_BUILDROOT_CXX=y
 EOF
 
 RUN make olddefconfig
-# keep -j1 because buildroot toolchain can be racey under parallel builds in containers
-RUN make -j1 toolchain
+RUN make -j$(nproc) toolchain
 
 # ---- Cross toolchain path ----
 ENV BR_HOST=/work/buildroot-2024.02.11/output/host
